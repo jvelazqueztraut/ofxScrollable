@@ -13,15 +13,13 @@
 #define K 30.
 
 ofxScrollable::ofxScrollable(){
-    position=0;
-    destination=0;
-    velocity=0;
-
     mouse=0;
     mouseDiff=0;
     mouseOrigin=0;
     posOrigin=0;
     mouseDown=false;
+    
+    reset();
 }
 
 void ofxScrollable::load(string path, float w, float h, float f){
@@ -122,4 +120,10 @@ void ofxScrollable::mouseDragged(ofMouseEventArgs& event){
     
 void ofxScrollable::mouseReleased(ofMouseEventArgs& event){
     mouseDown = false;
+}
+
+void ofxScrollable::reset(){
+    position=0;
+    destination=0;
+    velocity=0;
 }

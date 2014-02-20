@@ -19,6 +19,8 @@ public:
     void load(string path, float w, float h, float f=50.);
     
     void update();
+    
+    void reset();
         
     void setMouseDown(bool m);
     
