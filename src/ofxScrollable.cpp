@@ -43,8 +43,8 @@ void ofxScrollable::load(string path, float w, float h, float f){
     ofFloatPixels fadePixels;
     fadePixels.allocate(width,fadeSize,OF_PIXELS_RGBA);
     int i=0;
-    for(int y=0;y<fadeSize;y++) {
-        for(int x=0;x<width;x++){
+    for(int y=0;y<(int)fadeSize;y++) {
+        for(int x=0;x<(int)width;x++){
             fadePixels[i+0]=0.;
             fadePixels[i+1]=0.;
             fadePixels[i+2]=0.;
