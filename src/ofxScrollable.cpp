@@ -13,11 +13,9 @@
 #define K 30.
 
 ofxScrollable::ofxScrollable(){
-    mouse=0;
-    mouseDiff=0;
+    mouse=false;
     mouseOrigin=0;
     desOrigin=0;
-    mouseDown=false;
     
     ofAddListener(ofEvents().mousePressed,this,&ofxScrollable::mousePressed);
     ofAddListener(ofEvents().mouseDragged,this,&ofxScrollable::mouseDragged);
@@ -88,28 +86,26 @@ void ofxScrollable::update(){
     position+=(velocity*dt);
 }
     
-void ofxScrollable::setMouseDown(bool m){
-    mouseDown = m;
+void ofxScrollable::setMouse(bool m){
+    mouse = m;
 }
 
 void ofxScrollable::mousePressed(ofMouseEventArgs& event){
-    if(mouseDown){
-        mouse=event.y;
-        mouseOrigin=mouse;
+    if(mouse){
+        mouseOrigin=event.y;
         desOrigin=destination;
     }
 }
     
 void ofxScrollable::mouseDragged(ofMouseEventArgs& event){
-    if(mouseDown){
-        mouseDiff = event.y - mouse;
-        mouse = event.y;
-        destination = desOrigin + (mouse - mouseOrigin);
+    if(mouse){
+        destination = desOrigin + (event.y - mouseOrigin);
     }
 }
     
 void ofxScrollable::mouseReleased(ofMouseEventArgs& event){
-    if(mouseDown){
+    if(mouse){
+        destination = desOrigin + (event.y - mouseOrigin);
         if(texHeight<height){
             destination = 0;
         }
@@ -119,7 +115,7 @@ void ofxScrollable::mouseReleased(ofMouseEventArgs& event){
         else if(destination< (height-texHeight)){
             destination = (height-texHeight);
         }
-        mouseDown = false;
+        mouse = false;
     }
 }
 

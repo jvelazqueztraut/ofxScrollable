@@ -69,10 +69,10 @@ void testApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
     if(x<ofGetWidth()*0.5){
-        textLong.setMouseDown(true);
+        textLong.setMouse(true);
     }
     else{
-        textShort.setMouseDown(true);
+        textShort.setMouse(true);
     }
 }
 

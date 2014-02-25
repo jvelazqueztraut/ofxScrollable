@@ -22,7 +22,7 @@ public:
     
     void reset();
         
-    void setMouseDown(bool m);
+    void setMouse(bool m);
     
     void mouseDragged(ofMouseEventArgs& event);
     void mousePressed(ofMouseEventArgs& event);
@@ -37,11 +37,9 @@ public:
     float destination;
     float velocity;
     
-    float mouse;
-    float mouseDiff;
+    bool mouse;
     float mouseOrigin;
     float desOrigin;
-    bool mouseDown;
     
     ofTexture fade;
     float fadeSize;
