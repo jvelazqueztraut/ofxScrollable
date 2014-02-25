@@ -19,6 +19,10 @@ ofxScrollable::ofxScrollable(){
     posOrigin=0;
     mouseDown=false;
     
+    ofAddListener(ofEvents().mousePressed,this,&ofxScrollable::mousePressed);
+    ofAddListener(ofEvents().mouseDragged,this,&ofxScrollable::mouseDragged);
+    ofAddListener(ofEvents().mouseReleased,this,&ofxScrollable::mouseReleased);
+    
     reset();
 }
 
@@ -27,10 +31,6 @@ void ofxScrollable::load(string path, float w, float h, float f){
     height = h;
     
     ofFbo::allocate(width,height,GL_RGBA32F_ARB);
-    
-    ofAddListener(ofEvents().mousePressed,this,&ofxScrollable::mousePressed);
-    ofAddListener(ofEvents().mouseDragged,this,&ofxScrollable::mouseDragged);
-    ofAddListener(ofEvents().mouseReleased,this,&ofxScrollable::mouseReleased);
     
     ofPixels imagePixels;
     ofLoadImage(imagePixels, path);
