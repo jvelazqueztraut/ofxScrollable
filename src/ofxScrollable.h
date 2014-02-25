@@ -40,7 +40,7 @@ public:
     float mouse;
     float mouseDiff;
     float mouseOrigin;
-    float posOrigin;
+    float desOrigin;
     bool mouseDown;
     
     ofTexture fade;
