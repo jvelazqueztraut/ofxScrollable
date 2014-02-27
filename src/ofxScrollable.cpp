@@ -17,9 +17,7 @@ ofxScrollable::ofxScrollable(){
     mouseOrigin=0;
     desOrigin=0;
     
-    ofAddListener(ofEvents().mousePressed,this,&ofxScrollable::mousePressed);
-    ofAddListener(ofEvents().mouseDragged,this,&ofxScrollable::mouseDragged);
-    ofAddListener(ofEvents().mouseReleased,this,&ofxScrollable::mouseReleased);
+    
     
     reset();
 }
@@ -51,6 +49,10 @@ void ofxScrollable::load(string path, float w, float h, float f){
         }
     }
     fade.loadData(fadePixels);
+    
+    ofAddListener(ofEvents().mousePressed,this,&ofxScrollable::mousePressed);
+    ofAddListener(ofEvents().mouseDragged,this,&ofxScrollable::mouseDragged);
+    ofAddListener(ofEvents().mouseReleased,this,&ofxScrollable::mouseReleased);
 }
     
 void ofxScrollable::update(){
