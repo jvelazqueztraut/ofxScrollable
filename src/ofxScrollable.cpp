@@ -59,10 +59,9 @@ void ofxScrollable::update(){
         
     ofPushStyle();
     ofFbo::begin();
-    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofClear(0, 0);
     glBlendFuncSeparate(GL_ONE, GL_SRC_COLOR, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    ofClear(255,255);
-	ofClear(0, 0);
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     ofSetColor(255);
     tex.draw(width*0.5,position);
     ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
