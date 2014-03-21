@@ -22,11 +22,14 @@ public:
     
     void reset();
         
-    void setMouse(bool m);
+    float getWidth();
+    float getHeight();
     
-    void mouseDragged(ofMouseEventArgs& event);
-    void mousePressed(ofMouseEventArgs& event);
-    void mouseReleased(ofMouseEventArgs& event);
+    bool pressed(ofPoint pos, int ID=0);
+    bool dragged(ofPoint pos, int ID=0);
+    bool released(ofPoint pos, int ID=0);
+    
+private:
             
     float width,height;
     
@@ -37,8 +40,9 @@ public:
     float destination;
     float velocity;
     
-    bool mouse;
-    float mouseOrigin;
+    bool p;
+    int pID;
+    float pOrigin;
     float desOrigin;
     
     ofTexture fade;

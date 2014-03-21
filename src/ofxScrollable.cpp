@@ -13,12 +13,10 @@
 #define K 30.
 
 ofxScrollable::ofxScrollable(){
-    mouse=false;
-    mouseOrigin=0;
+    p=false;
+    pOrigin=0;
     desOrigin=0;
-    
-    
-    
+
     reset();
 }
 
@@ -49,10 +47,6 @@ void ofxScrollable::load(string path, float w, float h, float f){
         }
     }
     fade.loadData(fadePixels);
-    
-    ofAddListener(ofEvents().mousePressed,this,&ofxScrollable::mousePressed);
-    ofAddListener(ofEvents().mouseDragged,this,&ofxScrollable::mouseDragged);
-    ofAddListener(ofEvents().mouseReleased,this,&ofxScrollable::mouseReleased);
 }
     
 void ofxScrollable::update(){
@@ -86,27 +80,26 @@ void ofxScrollable::update(){
     velocity+=(accel*dt);
     position+=(velocity*dt);
 }
-    
-void ofxScrollable::setMouse(bool m){
-    mouse = m;
-}
 
-void ofxScrollable::mousePressed(ofMouseEventArgs& event){
-    if(mouse){
-        mouseOrigin=event.y;
-        desOrigin=destination;
-    }
+bool ofxScrollable::pressed(ofPoint pos, int ID){
+    p=true;
+    pID=ID;
+    pOrigin=pos.y;
+    desOrigin=destination;
+    return true;
 }
     
-void ofxScrollable::mouseDragged(ofMouseEventArgs& event){
-    if(mouse){
-        destination = desOrigin + (event.y - mouseOrigin);
+bool ofxScrollable::dragged(ofPoint pos, int ID){
+    if(p && pID==ID){
+        destination = desOrigin + (pos.y - pOrigin);
+        return true;
     }
+    return false;
 }
     
-void ofxScrollable::mouseReleased(ofMouseEventArgs& event){
-    if(mouse){
-        destination = desOrigin + (event.y - mouseOrigin);
+bool ofxScrollable::released(ofPoint pos, int ID){
+    if(p && pID==ID){
+        destination = desOrigin + (pos.y - pOrigin);
         if(texHeight<height){
             destination = 0;
         }
@@ -116,8 +109,17 @@ void ofxScrollable::mouseReleased(ofMouseEventArgs& event){
         else if(destination< (height-texHeight)){
             destination = (height-texHeight);
         }
-        mouse = false;
+        p = false;
+        return true;
     }
+    return false;
+}
+
+float ofxScrollable::getWidth(){
+    return width;
+}
+float ofxScrollable::getHeight(){
+    return height;
 }
 
 void ofxScrollable::reset(){
