@@ -47,6 +47,7 @@ void ofxScrollable::load(string path, float w, float h, float f){
         }
     }
     fade.loadData(fadePixels);
+    time = ofGetElapsedTimef();
 }
     
 void ofxScrollable::update(){
@@ -55,7 +56,6 @@ void ofxScrollable::update(){
     ofFbo::begin();
     ofClear(0, 0);
     glBlendFuncSeparate(GL_ONE, GL_SRC_COLOR, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     ofSetColor(255);
     tex.draw(width*0.5,position);
     ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
@@ -72,7 +72,9 @@ void ofxScrollable::update(){
     ofFbo::end();
     ofPopStyle();
         
-    float dt=1./ofGetFrameRate();
+    float t=ofGetElapsedTimef();
+    float dt=t-time;
+    time=t;
         
     float accel=destination-position;
     accel*=(K/MASS);
@@ -88,7 +90,7 @@ bool ofxScrollable::pressed(ofPoint pos, int ID){
     desOrigin=destination;
     return true;
 }
-    
+
 bool ofxScrollable::dragged(ofPoint pos, int ID){
     if(p && pID==ID){
         destination = desOrigin + (pos.y - pOrigin);

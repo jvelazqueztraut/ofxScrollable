@@ -7,9 +7,11 @@
 void testApp::setup(){
     textLong.load("textLong.png",FRAME_WIDTH,FRAME_HEIGHT,FADE_SIZE);
     textLong.setAnchorPercent(0.5,0.5);
-    
+    textLongPos.set(ofGetWidth()*0.25,ofGetHeight()*0.5);
+
     textShort.load("textShort.png",FRAME_WIDTH,FRAME_HEIGHT,FADE_SIZE);
     textShort.setAnchorPercent(0.5,0.5);
+    textShortPos.set(ofGetWidth()*0.75,ofGetHeight()*0.5);
 }
 
 //--------------------------------------------------------------
@@ -24,9 +26,9 @@ void testApp::draw(){
     ofBackground(ofColor::white);
     ofSetColor(255);
     
-    textLong.draw(ofGetWidth()*0.25,ofGetHeight()*0.5);
+    textLong.draw(textLongPos.x,textLongPos.y);
     
-    textShort.draw(ofGetWidth()*0.75,ofGetHeight()*0.5);
+    textShort.draw(textShortPos.x,textShortPos.y);
     
     //Just squares to show the dimensions of the scrollable zone and fade
     ofSetColor(0);
@@ -63,21 +65,37 @@ void testApp::mouseMoved(int x, int y ){
 }
 
 //--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button){
+void testApp::mousePressed(int x, int y, int button){
+    ofRectangle textLongRect(textLongPos.x-0.5*textLong.getWidth(),textLongPos.y-0.5*textLong.getHeight(),textLong.getWidth(),textLong.getHeight());
+    if(textLongRect.inside(x,y)){
+        textLong.pressed(ofPoint(x,y));
+        return;
+    }
+    ofRectangle textShortRect(textShortPos.x-0.5*textShort.getWidth(),textShortPos.y-0.5*textShort.getHeight(),textShort.getWidth(),textShort.getHeight());
+    if(textShortRect.inside(x,y)){
+        textShort.pressed(ofPoint(x,y));
+        return;
+    }
 }
 
 //--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button){
-    if(x<ofGetWidth()*0.5){
-        textLong.setMouse(true);
+void testApp::mouseDragged(int x, int y, int button){
+    if(textLong.dragged(ofPoint(x,y))){
+        return;
     }
-    else{
-        textShort.setMouse(true);
+    if(textShort.dragged(ofPoint(x,y))){
+        return;
     }
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
+    if(textLong.released(ofPoint(x,y))){
+        return;
+    }
+    if(textShort.released(ofPoint(x,y))){
+        return;
+    }
 }
 
 //--------------------------------------------------------------

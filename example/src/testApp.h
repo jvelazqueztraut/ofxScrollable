@@ -21,6 +21,8 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     ofxScrollable textShort;
+    ofPoint textShortPos;
     
     ofxScrollable textLong;
+    ofPoint textLongPos;
 };

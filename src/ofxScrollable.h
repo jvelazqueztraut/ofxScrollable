@@ -16,7 +16,7 @@ public:
     
     ~ofxScrollable(){};
     
-    void load(string path, float w, float h, float f=50.);
+    void load(string path, float w, float h, float f=20.);
     
     void update();
     
@@ -28,10 +28,10 @@ public:
     bool pressed(ofPoint pos, int ID=0);
     bool dragged(ofPoint pos, int ID=0);
     bool released(ofPoint pos, int ID=0);
-    
+        
 private:
-            
     float width,height;
+    ofVec2f anchor;
     
     ofTexture tex;
     float texWidth,texHeight;
@@ -47,4 +47,6 @@ private:
     
     ofTexture fade;
     float fadeSize;
+    
+    float time;
 };
