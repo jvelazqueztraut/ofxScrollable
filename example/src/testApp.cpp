@@ -9,7 +9,10 @@ void testApp::setup(){
     textLong.setAnchorPercent(0.5,0.5);
     textLongPos.set(ofGetWidth()*0.25,ofGetHeight()*0.5);
 
-    textShort.load("textShort.png",FRAME_WIDTH,FRAME_HEIGHT,FADE_SIZE);
+    ofImage textImg;
+    textImg.loadImage("textShort.png");
+    textImg.rotate90(2);
+    textShort.load(textImg,FRAME_WIDTH,FRAME_HEIGHT,FADE_SIZE);
     textShort.setAnchorPercent(0.5,0.5);
     textShortPos.set(ofGetWidth()*0.75,ofGetHeight()*0.5);
 }

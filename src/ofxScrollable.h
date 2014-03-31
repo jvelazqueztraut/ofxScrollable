@@ -17,6 +17,7 @@ public:
     ~ofxScrollable(){};
     
     void load(string path, float w, float h, float f=20.);
+    void load(ofPixels text, float w, float h, float f=20.);
     
     void update();
     
